@@ -64,6 +64,6 @@ sudo docker ps
 # 7. Veriicamos en el navegador
 http://localhost:8000
 
-![Nginx de prueba corriendo](https://raw.githubusercontent.com/tu_usuario/gestion_hinton/main/Dockers/Imagenes/Nginx.png)
+![Nginx](Dockers/Imagenes/Nginx.png)
 
 #Crear un docker file
