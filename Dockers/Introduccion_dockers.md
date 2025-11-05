@@ -78,7 +78,7 @@ docker stop 90688dec14d8
 
 sudo docker rm 90688dec14d8
 
-![Eliminación](Dockers/Imagenes/eliminacion.png)
+![Eliminación](./Imagenes/eliminacion.png)
 
 
 
