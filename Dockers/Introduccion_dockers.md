@@ -65,6 +65,6 @@ sudo docker ps
 http://localhost:8000
 
 
-![Página de Bienvenida de Nginx](./imagenes/Nginx.png)
+repo/imagenes/Nginx.png
 
 #Crear un docker file
