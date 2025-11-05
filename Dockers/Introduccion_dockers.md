@@ -64,7 +64,6 @@ sudo docker ps
 # 7. Veriicamos en el navegador
 http://localhost:8000
 
-
 ![Nginx de prueba corriendo](./Dockers/Imagenes/Nginx.png)
 
 
