@@ -66,5 +66,4 @@ http://localhost:8000
 
 ![Nginx de prueba corriendo](./Dockers/Imagenes/Nginx.png)
 
-
 #Crear un docker file
