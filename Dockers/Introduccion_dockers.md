@@ -66,5 +66,23 @@ http://localhost:8000
 
 ![Nginx](./Imagenes/Nginx.png)
 
+Ahora comenzaremos con la limpieza de este docker para futuros proyectos:
+# 1. Detener el Contenedor (Stop)
+El comando docker stop envía una señal de terminación elegante (SIGTERM) al proceso del servidor Nginx.
+
+# tuve problemas con los permisos y tuve que aplicarlos desde otro terminal
+sudo usermod -aG docker hinton1
+
+# Usaremos el ID corto 
+docker stop 90688dec14d8
+
+sudo docker rm 90688dec14d8
+
+![Eliminación](Dockers/Imagenes/eliminacion.png)
+
+
+
+
+
 
 #Crear un docker file
