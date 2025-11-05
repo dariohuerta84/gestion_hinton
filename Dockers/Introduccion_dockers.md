@@ -37,4 +37,34 @@ Lo que hace es encapsular y ejecutar toda la configuración necesaria para que N
 Sin Docker, instalar y configurar Nginx en tu sistema operativo Ubuntu requeriría varios comandos, descargas de dependencias y configuración manual.
 Con Docker: El comando hace todo eso por ti en un solo paso, utilizando la imagen preconfigurada de Nginx.
 
+# 1. Primero verficamos que el puerto 8000 no se este utilizando:
+sudo ss -tuln
+
 Pasos para poder Instalar con docker:
+# 2. Actualiza paquetes e instala dependencias
+sudo apt update
+sudo apt install ca-certificates curl gnupg
+
+# 3. Agrega la clave GPG y el repositorio oficial de Docker
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 4. Instala Docker Engine
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 5. Ejecuta Nginx en segundo plano (-d) y mapea el puerto 8000 de Ubuntu al puerto 80 de Nginx
+sudo docker run -d -p 8000:80 nginx
+
+# 6. Verificamos que el docker funcione correctamente
+sudo docker ps
+
+# 7. Veriicamos en el navegador
+http://localhost:8000
+
+
+![Página de Bienvenida de Nginx](./imagenes/Nginx.png)
+
+#Crear un docker file
