@@ -19,8 +19,11 @@ Ejemplo de comando en Ngix donde se ejecutara un contenedor en el puerto 8000
 # docker run -d -p 8000:80 nginx
 
 docker run : Le dice a Docker que tome una imagen y cree un Contenedor a partir de ella para ejecutarla.
+
 -d : Modo de ejecución: Ejecuta el contenedor en segundo plano (detached mode). Esto significa que el contenedor se inicia, pero libera tu terminal para que puedas seguir usándola.
+
 -p 8000:80 : Mapea un puerto de tu máquina anfitriona (Ubuntu) a un puerto dentro del contenedor.
+
 nginx: Le indica a Docker que descargue y use la imagen oficial del servidor web Nginx (por defecto, usa la etiqueta latest).
 
 Pero, para que sirve este comando exactamente? 
