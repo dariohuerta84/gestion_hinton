@@ -81,8 +81,4 @@ sudo docker rm 90688dec14d8
 ![Eliminación](./Imagenes/eliminacion.png)
 
 
-
-
-
-
-#Crear un docker file
+## Ahora vamos con al creacion de un DockerFile
