@@ -64,6 +64,7 @@ sudo docker ps
 # 7. Veriicamos en el navegador
 http://localhost:8000
 
-![Nginx](Dockers/Imagenes/Nginx.png)
+![Nginx](./Imagenes/Nginx.png)
+
 
 #Crear un docker file
