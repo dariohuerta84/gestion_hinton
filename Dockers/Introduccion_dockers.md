@@ -82,3 +82,33 @@ sudo docker rm 90688dec14d8
 
 
 ## Ahora vamos con al creacion de un DockerFile
+
+1. # Abrimos la terminal desde dentro de la carpeta de gestion_hinton y creamos una carpeta
+mkdir dockerfile
+
+2. # El comando "cat > Dockerfile" crea el archivo
+cat > Dockerfile << EOF
+
+3. # Creamos el contenido del archivo app.py
+echo 'print("Hola desde el contenedor Docker, hinton1!")' > dockerfile/app.py
+
+4. # EScribimos las instruciones en la terminal 
+
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY dockerfile/ /app/
+
+CMD ["python", "app.py"]
+
+EOF
+
+5. # Vamos con la creacion de la imagen
+sudo docker build -t mi-app-python:v1 .
+
+6. # Ejecutamos el contenedor
+sudo docker run mi-app-python:v1
+
+
+![Dockerfile](./Imagenes/dockerfile.png)
