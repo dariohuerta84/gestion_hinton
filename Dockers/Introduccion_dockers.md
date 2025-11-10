@@ -112,3 +112,6 @@ sudo docker run mi-app-python:v1
 
 
 ![Dockerfile](./Imagenes/dockerfile.png)
+
+El siguiente paso sera crear un DockerFile con Machine Learning
+- 
