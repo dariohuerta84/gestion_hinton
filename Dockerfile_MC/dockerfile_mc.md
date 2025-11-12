@@ -109,3 +109,6 @@ sudo docker rmi ml-env:v1
 Si querés dejar Docker totalmente limpio:
 
 sudo docker system prune -a --volumes
+
+4. comando para ver la imagen 
+sudo docker images

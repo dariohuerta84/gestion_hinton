@@ -12,3 +12,10 @@ El contenedor arranca bien con Jupyter.
 Monte mi carpeta local (Dockerfile_MC) para que los cambios se sincronicen.
 
 Y puedes ver tus archivos actualizados desde el navegador.
+
+Comandos base
+# Ahora vamos a cancelar este proceso
+sudo docker stop practical_proskuriakova
+
+# Si queremos utilizarlo de nuevo
+sudo docker start practical_proskuriakova
