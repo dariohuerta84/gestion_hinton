@@ -76,3 +76,36 @@ ah--- paso de todo xd
 
 ##espera esto lo escribi desde jupiter
 ## este texto fue escrito desde jupiter y se pudo guardar en mi visual
+
+# Ahora vamos a cancelar este proceso
+sudo docker stop practical_proskuriakova
+
+# Si queremos utilizarlo de nuevo
+sudo docker start practical_proskuriakova
+
+
+# Para dejar el docker completamente limpio
+1. Solo eliminar el contenedor actual
+
+sudo docker ps
+
+En tu caso:
+
+e563c7e99aae   ml-env:v1   ...
+
+Entonces lo detenés y eliminás:
+
+sudo docker stop e563c7e99aae
+sudo docker rm e563c7e99aae
+
+ 2. También eliminar la imagen (para reinstalar desde cero)
+
+sudo docker rmi ml-env:v1
+
+(Esto borra la imagen que construiste a partir del Dockerfile)
+
+ 3. Limpieza completa (contenedores, imágenes, volúmenes, caché)
+
+Si querés dejar Docker totalmente limpio:
+
+sudo docker system prune -a --volumes
