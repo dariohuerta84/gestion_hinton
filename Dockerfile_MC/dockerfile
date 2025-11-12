@@ -1,0 +1,35 @@
+# Imagen base con Python
+FROM python:3.10-slim
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar todo el contenido de tu carpeta local al contenedor
+COPY . /app
+
+# Instalar dependencias del sistema (para que ML funcione sin errores)
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar librerías comunes de Machine Learning
+RUN pip install --no-cache-dir \
+    numpy \
+    pandas \
+    scikit-learn \
+    matplotlib \
+    seaborn \
+    jupyter
+
+## Si quieres usar TensorFlow o PyTorch (opcional):
+RUN pip install tensorflow
+RUN pip install torch torchvision torchaudio
+
+# Exponer el puerto de Jupyter
+EXPOSE 8888
+
+# Comando por defecto al iniciar el contenedor
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
