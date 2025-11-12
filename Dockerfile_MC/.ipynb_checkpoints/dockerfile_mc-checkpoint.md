@@ -57,14 +57,3 @@ Ahora estás trabajando dentro del contenedor, pero con tus propios documentos. 
 
 Para que ambos lados vean lo mismo (tu host y el contenedor), necesitas montar tu carpeta local como un volumen cuando ejecutas el contenedor.
 sudo docker run -p 8888:8888 -v "$(pwd)/Dockerfile_MC:/app" ml-env:v1
-
-tuve un error con la actualizacion de cambios y tuve que detener y eliminar ese docker para ejecutarlo de nuevo
-
-# Detener el comando
-sudo docker stop 1988cf2d14ee
-
-# Eliminacion
-sudo docker rm 1988cf2d14ee
-
-# Reejecucion
-sudo docker run -p 8888:8888 -v "$(pwd)/Dockerfile_MC:/app" ml-env:v1
