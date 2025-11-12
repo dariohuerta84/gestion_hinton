@@ -73,3 +73,5 @@ cambio abrusco esperar eliminacion del checkpoint
 problema solucionado desde github, ya que me pedia permisos extras desde aca
 bueno sigamos desde aqui
 ah--- paso de todo xd
+
+espera esto se actualiza?
