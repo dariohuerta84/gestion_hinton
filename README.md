@@ -4,3 +4,11 @@
 Una prueba de que si funciona los cambios generados
 "Matias Dario Huerta Cruz"
 prueba desde mi lp
+
+Resumen 12 de noviembre 11:36
+
+El contenedor arranca bien con Jupyter.
+
+Monte mi carpeta local (Dockerfile_MC) para que los cambios se sincronicen.
+
+Y puedes ver tus archivos actualizados desde el navegador.
