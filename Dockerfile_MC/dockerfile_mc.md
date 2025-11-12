@@ -72,3 +72,4 @@ sudo docker run -p 8888:8888 -v "$(pwd)/Dockerfile_MC:/app" ml-env:v1
 cambio abrusco esperar eliminacion del checkpoint
 problema solucionado desde github, ya que me pedia permisos extras desde aca
 bueno sigamos desde aqui
+ddd
