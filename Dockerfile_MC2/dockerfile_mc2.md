@@ -37,3 +37,13 @@ Entrena,
 Calcula gradientes,
 Optimiza,
 Imprime resultados.
+
+### Asegurarse que estas en la carpeta:
+- cd Dockerfile_MC2
+
+### Vamos a construir la imagen con este comando:
+- cd DockerNN
+sudo docker build -t nn-container:v1 .
+
+### vamos a ejecutarlo dentro del docker
+- sudo docker run --rm nn-container:v1
