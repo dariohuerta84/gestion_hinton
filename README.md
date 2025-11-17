@@ -20,3 +20,8 @@ sudo docker stop practical_proskuriakova
 
 #### Si queremos utilizarlo de nuevo
 sudo docker start practical_proskuriakova
+
+### Comandos para arreglar branches
+git checkout main
+git fetch --all #esto actualiza las referencias remotas(sin mnzclar nada)
+git push origin main --force #sobreescribe lo que hay en tu main local
