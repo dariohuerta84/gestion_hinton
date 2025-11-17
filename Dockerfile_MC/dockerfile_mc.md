@@ -112,3 +112,11 @@ sudo docker system prune -a --volumes
 
 4. comando para ver la imagen 
 sudo docker images
+
+Puntos donde hubo más complicaciones
+
+Autenticación de GitHub (token) → error común tras eliminar contraseña tradicional.
+
+Sincronización de ramas (main vs master y commits divergentes).
+
+Errores 403 de Jupyter por permisos al montar la carpeta local.
