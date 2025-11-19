@@ -54,3 +54,9 @@ Esta estructura es mi entorno completo de ML dentro del contenedor.
 - La imagen Docker binaria se almacena internamente en /var/lib/docker y puedo verificarla con sudo docker images.
 - El Resultado Final es que ya tengo un Docker de Machine Learning completamente funcional, reproducible, liviano y listo para entrenar mi primera red neuronal en un entorno encapsulado.
 ---
+
+
+
+# Uso de Scikit-learn y que es?
+- Es una biblioteca importante de python, especializada en el uso de machine learning.
+- Se usa para algoritmos de clasificación, regresión y agrupación.
