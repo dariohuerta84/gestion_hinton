@@ -1,4 +1,4 @@
-```md
+
 # Prueba de Concepto: Regresión Lineal en Docker
 
 Este proyecto es una prueba de concepto básica, equivalente al “Hola Mundo” del Machine Learning, utilizando una regresión lineal sencilla dentro de un contenedor Docker.  
@@ -20,9 +20,8 @@ Cada valor de entrada debe multiplicarse por 2 para obtener la salida correspond
 
 ### 2. Entrenamiento del modelo
 
-```python
+python
 model.fit(X, y)
-```
 
 Con esta instrucción el modelo analiza los datos y aprende la relación matemática por sí mismo.
 
