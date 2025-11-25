@@ -60,3 +60,5 @@ Esta estructura es mi entorno completo de ML dentro del contenedor.
 # Uso de Scikit-learn y que es?
 - Es una biblioteca importante de python, especializada en el uso de machine learning.
 - Se usa para algoritmos de clasificación, regresión y agrupación.
+
+# Continuo en mi laptop 24/11/25
