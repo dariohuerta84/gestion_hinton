@@ -61,4 +61,4 @@ Esta estructura es mi entorno completo de ML dentro del contenedor.
 - Es una biblioteca importante de python, especializada en el uso de machine learning.
 - Se usa para algoritmos de clasificación, regresión y agrupación.
 
-# Continuo en mi laptop 24/11/25
+# Continuo con open CV 26/11/25:
