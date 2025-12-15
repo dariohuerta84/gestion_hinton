@@ -67,3 +67,6 @@ Esta estructura es mi entorno completo de ML dentro del contenedor.
 - cambiar de github.com/repositorio a deepwiki.com/repositorio para resumir repos
 - Conocimientos aceca de Radware 
 
+# Sacar potencial a los dockers
+### 1 : Comenzar con guardar los dockers en dockerhub
+### 2 : 
