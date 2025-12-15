@@ -61,4 +61,9 @@ Esta estructura es mi entorno completo de ML dentro del contenedor.
 - Es una biblioteca importante de python, especializada en el uso de machine learning.
 - Se usa para algoritmos de clasificación, regresión y agrupación.
 
-# Continuo con open CV 26/11/25:
+# Continuaciones y actualizaciones:
+- Creacion de dockerhub
+- Analisis del nuevo Neested learnig
+- cambiar de github.com/repositorio a deepwiki.com/repositorio para resumir repos
+- Conocimientos aceca de Radware 
+
