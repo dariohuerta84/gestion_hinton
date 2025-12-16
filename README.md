@@ -87,6 +87,7 @@ Parte del proceso de limpieza para liberar recursos.
 - sudo docker rm -f Nombre	---   // Fuerza la eliminación de un contenedor, deteniéndolo si es necesario.	
 Útil para eliminar contenedores que no responden.
 
+- ssh hinton2@Dirección_IP --- // Este comando sirve para cambiar el usuario a el otro hinton en este caso
 
 ## Comandos tmux:
 - tmux ls	              ---                // Muestra una lista de todas las sesiones de Tmux activas.	
@@ -100,3 +101,5 @@ Te devuelve al estado exacto de tu trabajo, incluso después de desconexiones.
 
 - Ctrl-b d	            ---              // Atajo de teclado para desadjuntar (separar) la sesión actual.	
 Es la forma segura de salir sin detener los procesos que corren dentro de ella.
+
+- tmux kill-session -t tmux_victoria   --- // Con este comando se elimia la sesion de tmux, asegurarse de no estar dentro del tmux, primero salir de la secion
