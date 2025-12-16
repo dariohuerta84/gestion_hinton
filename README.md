@@ -72,31 +72,31 @@ Esta estructura es mi entorno completo de ML dentro del contenedor.
 ### Uso de comandos linux y tmux:
 
 ## Comandos linux:
-- sudo docker ps -a	           // Muestra todos los contenedores (activos, detenidos y salidos).	
+- sudo docker ps -a	     ---      // Muestra todos los contenedores (activos, detenidos y salidos).	
 Se usa para encontrar el ID o nombre de contenedores detenidos que necesitan ser eliminados o reiniciados. 
 
-- sudo docker stop ID	           // Detiene un contenedor en ejecución (por ID o nombre).	
+- sudo docker stop ID	 ---          // Detiene un contenedor en ejecución (por ID o nombre).	
 Se usa para pausar el entorno de desarrollo interactivo Dockerfile_MC. 
 
-- sudo docker start ID	       // Reinicia un contenedor que ha sido detenido.	
+- sudo docker start ID	 ---      // Reinicia un contenedor que ha sido detenido.	
 Se usa para reanudar el entorno persistente Dockerfile_MC. 
 
-- sudo docker rm ID	           // Elimina un contenedor que se encuentra detenido (por ID o nombre).	
+- sudo docker rm ID	     ---      // Elimina un contenedor que se encuentra detenido (por ID o nombre).	
 Parte del proceso de limpieza para liberar recursos. 
 
-- sudo docker rm -f Nombre	   // Fuerza la eliminación de un contenedor, deteniéndolo si es necesario.	
+- sudo docker rm -f Nombre	---   // Fuerza la eliminación de un contenedor, deteniéndolo si es necesario.	
 Útil para eliminar contenedores que no responden.
 
 
 ## Comandos tmux:
-- tmux ls	                              // Muestra una lista de todas las sesiones de Tmux activas.	
+- tmux ls	              ---                // Muestra una lista de todas las sesiones de Tmux activas.	
 Te permite verificar los nombres de las sesiones disponibles (ej., tmux_victoria).
 
-- tmux new -s nombre_sesion	          // Crea una nueva sesión de Tmux con el nombre especificado.	
+- tmux new -s nombre_sesion	  ---        // Crea una nueva sesión de Tmux con el nombre especificado.	
 Inicia un nuevo espacio de trabajo aislado y persistente.
 
-- tmux attach -t nombre_sesion	      // Se adjunta (regresa) a una sesión de Tmux que ya existe.	
+- tmux attach -t nombre_sesion	 ---     // Se adjunta (regresa) a una sesión de Tmux que ya existe.	
 Te devuelve al estado exacto de tu trabajo, incluso después de desconexiones.
 
-- Ctrl-b d	                          // Atajo de teclado para desadjuntar (separar) la sesión actual.	
+- Ctrl-b d	            ---              // Atajo de teclado para desadjuntar (separar) la sesión actual.	
 Es la forma segura de salir sin detener los procesos que corren dentro de ella.
