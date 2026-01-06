@@ -1,0 +1,31 @@
+# Base ligera de Python
+FROM python:3.10-slim
+
+# Evitar que los logs se queden en el buffer
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# DEPENDENCIAS DE SISTEMA (Actualizadas para Debian Trixie/Slim)
+RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    build-essential \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalación de librerías de Python
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar el resto de los archivos
+COPY . .
+
+# EXPOSICIÓN DE PUERTO (Configuración estándar de tu repo)
+EXPOSE 8888
+
+# COMANDO PARA INICIAR JUPYTER (Copiado de tu Dockerfile_MC)
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]

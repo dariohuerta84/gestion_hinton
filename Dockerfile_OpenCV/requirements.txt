@@ -1,0 +1,6 @@
+numpy
+opencv-python
+matplotlib
+jupyter
+# Opcional si quieres usar IA con OpenCV después
+torch
