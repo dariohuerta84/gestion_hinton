@@ -43,20 +43,20 @@ Si ya existe (Reiniciar): Si el contenedor está detenido pero no lo has borrado
 
 
 sudo docker start <ID_o_Nombre> 
-+1
+
 
 2. Comandos para Cerrar (Detener)
 Para cerrar el entorno de manera segura sin perder el trabajo sincronizado en tu carpeta local:
 
 Desde la terminal donde corre: Presiona Ctrl + C dos veces. Esto enviará la señal de apagado al servidor de Jupyter.
-+1
+
 
 Desde otra terminal (Recomendado):
 
 Primero identifica el ID del contenedor: sudo docker ps.
 
 Detén el proceso: sudo docker stop <ID_del_contenedor>.
-+1
+
 
 
 Ejemplo de tu log: sudo docker stop practical_proskuriakova.
