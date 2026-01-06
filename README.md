@@ -1,4 +1,4 @@
-# gestion_hinton
+# Gestion computadoras Hinton 1 & 2
 "Un herediano mas comenzando una gestion de dockers"
 
 Una prueba de que si funciona los cambios generados
