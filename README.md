@@ -103,3 +103,9 @@ Te devuelve al estado exacto de tu trabajo, incluso después de desconexiones.
 Es la forma segura de salir sin detener los procesos que corren dentro de ella.
 
 - tmux kill-session -t tmux_victoria   --- // Con este comando se elimia la sesion de tmux, asegurarse de no estar dentro del tmux, primero salir de la secion
+
+# Detener el contenedor de Visión
+sudo docker stop docker_opencv
+
+# Detener el contenedor de Pruebas Ligeras
+sudo docker stop docker_limited
