@@ -109,3 +109,12 @@ sudo docker stop docker_opencv
 
 # Detener el contenedor de Pruebas Ligeras
 sudo docker stop docker_limited
+
+| Dockers | Contenido | Función | Puerto | ¿Tiene Jupyter? |
+| :--- | :--- | :--- | :--- | :--- |
+| **DockerFile** | Python basic | Demostrar el funcionamiento básico de construcción (build) y ejecución (run) de un contenedor que imprime un mensaje de saludo. | No necesita | No |
+| **DockerFile_MC** | NumPy, Pandas, Scikit-learn, Matplotlib, Seaborn y Jupyter Deep Learning: TensorFlow y PyTorch. | Proporcionar un IDE web interactivo con sincronización bidireccional de archivos mediante volúmenes. | 8888 | Sí |
+| **DockerFile_MC2** | Pytorch y Numpy. Sistema: build essential. | Ejecutar un pipeline completo de entrenamiento en un contenedor efímero que se auto-elimina al terminar. | No utiliza | No |
+| **docker_opencv** | opencv-python-headless, numpy, matplotlib, imutils. | Proporcionar un entorno especializado para el procesamiento de imágenes y visión computacional, optimizado para ligereza. | 8889 | Sí |
+| **DockerFile_SKlearn** | Scikit-learn, Pandas y NumPy. | Validar la instalación de la pila de ML y realizar pruebas de concepto (PoC) como regresiones lineales simples. | 5000 | No |
+| **docker_limited** | Jupyter, NumPy y Pandas. | Entorno interactivo ligero para pruebas rápidas de datos, transformado desde un servidor Nginx. | 8890 | Sí |
