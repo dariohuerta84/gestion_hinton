@@ -1,0 +1,24 @@
+# 1. Base de Python (Igual que tus otros entornos para consistencia)
+FROM python:3.10-slim
+
+# 2. Configuración de entorno
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+
+# 3. Dependencias de sistema básicas
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 4. Instalación de Jupyter
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copiar contenido local
+COPY . .
+
+# 6. Exponer puerto estándar de Jupyter
+EXPOSE 8888
+
+# 7. Comando de inicio (Copiado de tu estándar Dockerfile_MC)
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
