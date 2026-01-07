@@ -118,3 +118,9 @@ sudo docker stop docker_limited
 | **docker_opencv** | Visión | 8889 | Sí | `sudo docker rm -f docker_opencv \|\| true && sudo docker run -d --name docker_opencv -p 8889:8888 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_OpenCV:/app opencv-jupyter:v1` | `sudo docker stop docker_opencv` |
 | **DockerFile_Sklearn** | ML & PoC | 5000 | No | `sudo docker build -t dockerfile_sklearn -f Dockerfile_Sklearn/Dockerfile Dockerfile_Sklearn && sudo docker rm -f docker_sklearn \|\| true && sudo docker run -d --name docker_sklearn -p 5000:5000 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_Sklearn:/app dockerfile_sklearn` | `sudo docker stop docker_sklearn` |
 | **docker_limited** | Jupyter Liviano | 8890 | Sí | `sudo docker rm -f docker_limited \|\| true && sudo docker run -d --name docker_limited -p 8890:8888 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_Limited:/app limited-jupyter:v1` | `sudo docker stop docker_limited` |
+
+
+
+## el comienzo de un docker potente al nivel de una hinton 1
+- Para que un contenedor Docker sea realmente "potente" y aproveche el hardware de la HINTON I, no solo debe incluir las librerías, sino también estar configurado para la aceleración por hardware y la gestión eficiente de la memoria de video.
+- En este caso, lo llamaremos Docker_Hinton 
