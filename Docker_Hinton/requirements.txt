@@ -2,3 +2,7 @@ psutil
 jupyterlab
 ipywidgets
 cupy-cuda12x
+transformers
+accelerate
+bitsandbytes
+sentencepiece
