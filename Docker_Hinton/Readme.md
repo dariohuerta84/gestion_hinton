@@ -1,8 +1,8 @@
-para detener el contenedor usa
+- para detener el contenedor usa
 - sudo docker stop hinton_interactive_final
-para reaundar el contenedor usa
-- sudo docker start hinton_interactive_final
-para eliminar el contenedor
+- para reaundar el contenedor usa
+- sudo docker start hinton_interactive_final # http://localhost:5050
+- para eliminar el contenedor
 - sudo docker rm -f hinton_interactive_final
 
 🚀 Ejecutable Combinado (Puerto 5050)
