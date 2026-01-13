@@ -26,3 +26,8 @@ Una vez iniciado el contenedor, debes ejecutar el script para cargar el modelo e
 4. Reinicio de Emergencia
 Si el puerto 5051 deja de responder o la interfaz se congela:
 - sudo docker restart hinton_interactive_final
+
+5. Eliminacion del contenedor
+Primero detienes el proceso para que la GPU RTX A6000 cierre la sesión de forma limpia y luego lo borras.
+- sudo docker stop hinton_interactive_final
+- sudo docker rm hinton_interactive_final
