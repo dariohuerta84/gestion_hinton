@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  chatbot-hinton:
+    image: hinton-ultimate  # La imagen que ya tienes
+    container_name: hinton_interactive_final
+    restart: unless-stopped
+    ports:
+      - "5051:5051"
+      - "5050:5050"
+    volumes:
+      - .:/app  # Mantiene tu código y el fondo.jpg sincronizados
+    runtime: nvidia  # Crucial para detectar la RTX A6000
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+networks:
+  default:
+    name: hinton_network

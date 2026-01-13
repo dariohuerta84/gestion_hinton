@@ -31,3 +31,21 @@ Si el puerto 5051 deja de responder o la interfaz se congela:
 Primero detienes el proceso para que la GPU RTX A6000 cierre la sesión de forma limpia y luego lo borras.
 - sudo docker stop hinton_interactive_final
 - sudo docker rm hinton_interactive_final
+
+
+### 🚀 Gestión del Proyecto con Docker Compose
+
+Ejecutar estos comandos en la ruta: `~/Documents/ADMINISTRACION/repo/gestion_hinton/Docker_Hinton`
+
+| Acción | Comando | Descripción |
+| :--- | :--- | :--- |
+| **Levantar** | `sudo docker-compose up -d` | Crea e inicia el contenedor en segundo plano. |
+| **Pausar** | `sudo docker-compose stop` | Libera la **RTX A6000** y RAM (mantiene estado). |
+| **Reanudar** | `sudo docker-compose start` | Reactiva el contenedor previamente pausado. |
+| **Estado** | `sudo docker-compose ps` | Muestra si el servicio está `Up` o `Exit`. |
+| **Logs** | `sudo docker-compose logs -f` | Monitorea la terminal de la IA en tiempo real. |
+| **Reiniciar** | `sudo docker-compose restart` | Útil si la interfaz de Gradio no responde. |
+| **Eliminar** | `sudo docker-compose down` | Borra el contenedor y redes (código a salvo). |
+| **Ejecutar IA** | `sudo docker exec -it hinton_interactive_final python3 /app/llm_hinton.py` | Inyecta el script del chatbot en el contenedor. |
+
+> **Nota:** Según el **Art. 19**, libera la GPU con `stop` si no la estás usando para priorizar tesis.
