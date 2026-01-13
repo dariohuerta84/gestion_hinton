@@ -1,17 +1,37 @@
-- para detener el contenedor usa
-- sudo docker stop hinton_interactive_final
-- para reaundar el contenedor usa
-- sudo docker start hinton_interactive_final # http://localhost:5050
-- para eliminar el contenedor
-- sudo docker rm -f hinton_interactive_final
 
-🚀 Ejecutable Combinado (Puerto 5050)
-Este comando mapea el puerto interno de Jupyter (8888) al puerto externo 5050 de tu servidor:
+- http://localhost:5050: Sigue siendo tu base de operaciones. Aquí entras a JupyterLab, creas tus archivos .py y escribes tus notebooks.
 
-Bash
+- http://localhost:5051: Este será el enlace específico para la Interfaz de Chat (Gradio). Cuando ejecutes el script del modelo de lenguaje, la página con el fondo de los edificios cyberpunk y el chat neón se cargará en este puerto.
 
-sudo docker build -t dockerfile_mc -f Dockerfile_MC/Dockerfile Dockerfile_MC && \
-sudo docker rm -f docker_mc || true && \
-sudo docker run -d --name docker_mc -p 5050:8888 \
--v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_MC:/app \
-dockerfile_mc jupyter lab --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''
+# 🤖 HINTON 1 - Neural Interface Control
+
+Este proyecto despliega una interfaz de chat inteligente basada en **Llama-3.1** y **Gradio**, optimizada para ejecutarse en la GPU **NVIDIA RTX A6000** del Laboratorio FACI-UPCH.
+
+## 🚀 Comandos de Gestión (Docker Compose)
+
+Para gestionar el contenedor de la IA, abre una terminal en la carpeta del proyecto y utiliza:
+
+### 1. Iniciar el sistema
+Levanta el contenedor en segundo plano (*detached mode*).
+```bash
+docker-compose up -d
+
+### 2. Detener el sistema
+Detiene los procesos pero mantiene el contenedor creado. Es útil para liberar RAM temporalmente.
+docker-compose stop -d
+
+### 3. Iniciar el sistema
+Util para monitorear qué está pensando la IA o si hay errores de carga.
+docker-compose logs -f
+
+### 4. Ver logs en tiempo real
+Util para monitorear qué está pensando la IA o si hay errores de carga.
+docker-compose logs -f
+
+### 5. Eliminar el contenedor
+Detiene y borra el contenedor (pero no borra tu código ni tu imagen fondo.jpg).
+docker-compose down
+
+### 6. Reiniciar (Hard Reset)
+Si el sistema se queda "congelado" o el puerto 5051 da error.
+docker-compose restart

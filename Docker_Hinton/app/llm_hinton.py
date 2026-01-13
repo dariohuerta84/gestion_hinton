@@ -2,11 +2,10 @@ import torch
 from transformers import pipeline
 
 # Verificación de la Energía Maldita (GPU)
-device = "cuda" if torch.cuda.is_available() else "cpu" [cite: 1417]
-print(f"🔮 Canalizando poder a través de: {torch.cuda.get_device_name(0)}") [cite: 1389]
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"🔮 Canalizando poder a través de: {torch.cuda.get_device_name(0)}")
 
-# Cargando un modelo de lenguaje (Ejemplo: TinyLlama)
-# Con 48GB de VRAM, ¡podrías cargar modelos mucho más grandes!
+# Cargando el modelo de lenguaje
 pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", device=0)
 
 prompt = "Vez que si funciona el Docker? Cosas como estas puedes hacer en la HINTON 1. ¿Qué opinas?"
