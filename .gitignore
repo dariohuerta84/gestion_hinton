@@ -1,1 +1,11 @@
 .ipynb_checkpoints/
+# Modelos de Deep Learning
+*.pt
+*.pth
+*.h5
+*.bin
+
+# Entornos y Datasets
+venv_transformer/
+dataset/
+IMT DATABASE/
