@@ -1,12 +1,3 @@
-cat > dockerfile << EOF
-
-
-echo 'print("Hola desde el contenedor Docker, hinton1!")' > Dockerfile/app.py
 FROM python:3.10-slim
-
 WORKDIR /app
-
-COPY dockerfile/ /app/
-
-CMD ["python", "app.py"]
-
+CMD ["python", "-c", "print('¡Hola! El contenedor básico funciona correctamente.')"]
