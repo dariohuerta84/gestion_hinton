@@ -1,126 +1,420 @@
-# Gestion computadoras Hinton 1 & 2
-"Un herediano mas comenzando una gestion de dockers"
+# Gestión de Infraestructura Hinton 1 & 2
 
-Una prueba de que si funciona los cambios generados
-"Matias Dario Huerta Cruz"
-prueba desde mi lp
+Administración de entornos de **Machine Learning, visión computacional y experimentación** utilizando **Docker** en los servidores **HINTON 1** y **HINTON 2** del laboratorio **GESTIÓN HINTON**.
 
----
-## Resumen 12 de noviembre 11:36
+Este repositorio documenta:
 
-El contenedor arranca bien con Jupyter.
+- despliegue de contenedores Docker
+- gestión de entornos de Machine Learning
+- uso de Jupyter en contenedores
+- administración de sesiones persistentes con `tmux`
+- comandos de operación del sistema
 
-Monte mi carpeta local (Dockerfile_MC) para que los cambios se sincronicen.
-
-Y pude ver mis archivos utilizados desde el navegador.
-
-Comandos base
----
-
-
-#### Ahora vamos a cancelar este proceso
-- sudo docker stop practical_proskuriakova     
-   
-#### Si queremos utilizarlo de nuevo
-- sudo docker start practical_proskuriakova
-
-### Comandos para arreglar branches
-- git checkout main
-- git fetch --all #esto actualiza las referencias remotas(sin mnzclar nada)
-- git push origin main --force #sobreescribe lo que hay en tu main local
-
-### Comando para visualizar tu imagen de docker:
-- sudo docker images
-### Para saber donde esta corriendo cuando lo ejecutas:
-- sudo docker ps
-
+El objetivo es mantener **entornos reproducibles, aislados y administrables** para investigación y experimentación en IA.
 
 ---
-## Resumen 17 de noviembre 11:46
 
-- Mi Resumen del Trabajo Realizado
-He logrado establecer mi entorno de Machine Learning completamente en Docker, utilizando PyTorch, y esta fue la trayectoria:
-- Elegí un Docker orientado a Machine Learning: 
-- Mi objetivo era claro: necesitaba un contenedor diseñado para entrenar redes neuronales, no para servir páginas web. Por eso, decidí que no utilizaría puertos.
-- La Decisión fue PyTorch (solo CPU): Me incliné por PyTorch (versión torch==2.2.0) en lugar de TensorFlow. La razón es que no necesito GPU, estoy enfocado en el aprendizaje y en hacer pruebas rápidas con modelos pequeños, y PyTorch CPU-only es mucho más liviano para este propósito.Creé la Estructura del Proyecto:
-- Organicé todo de manera limpia dentro de la carpeta Dockerfile_MC2
+# Arquitectura del repositorio
 
-Esta estructura es mi entorno completo de ML dentro del contenedor.
-- Configuré las Dependencias Esenciales: En requirements.txt solo incluí lo necesario para mantener el contenedor ligero:numpytorch==2.2.0
-- Desarrollé un Script de Entrenamiento Funcional: En app/main.py, tengo un código que valida mi entorno. 
-- Este script:Genera datos sintéticos simples ($y = 3x + 2$).Construye una Red Neuronal Multicapa (MLP) muy básica.Entrena la red durante varias épocas.Muestra la pérdida (loss) en la terminal.Imprime una predicción final.
-- Ajusté el Dockerfile para ser Operativo y Liviano: Mi Dockerfile actual utiliza python:3.10-slim, instala las dependencias de sistema y Python, copia mi proyecto y, crucialmente, tiene un comando de entrada que ejecuta automáticamente python app/main.py.
-- Confirmé que NO usa Puertos: Esto es una característica clave. Como el contenedor solo ejecuta una tarea de entrenamiento y finaliza, no es un servidor. Se ejecuta y termina sin publicar endpoints ni requerir configuración de puertos.Comprendí el Almacenamiento: Mi código fuente y Dockerfile están en gestion_hinton/Dockerfile_MC2. 
-- La imagen Docker binaria se almacena internamente en /var/lib/docker y puedo verificarla con sudo docker images.
-- El Resultado Final es que ya tengo un Docker de Machine Learning completamente funcional, reproducible, liviano y listo para entrenar mi primera red neuronal en un entorno encapsulado.
+```
+gestion_hinton
+│
+├── Dockerfile
+│
+├── Dockerfile_MC
+│   └── entorno Deep Learning con Jupyter
+│
+├── Dockerfile_MC2
+│   └── pipeline de entrenamiento ML con PyTorch
+│
+├── Dockerfile_OpenCV
+│   └── entorno de visión computacional
+│
+├── Dockerfile_Sklearn
+│   └── entorno de experimentación ML
+│
+├── Dockerfile_Limited
+│   └── entorno Jupyter liviano
+│
+└── README.md
+```
+
 ---
 
+# Resumen de Trabajo
 
+## Sesión — 12 de noviembre (11:36)
 
-# Uso de Scikit-learn y que es?
-- Es una biblioteca importante de python, especializada en el uso de machine learning.
-- Se usa para algoritmos de clasificación, regresión y agrupación.
+El contenedor Docker se ejecutó correctamente con **Jupyter Notebook**.
 
-# Continuaciones y actualizaciones:
-- Creacion de dockerhub
-- Analisis del nuevo Neested learnig
-- cambiar de github.com/repositorio a deepwiki.com/repositorio para resumir repos
-- Conocimientos aceca de Radware 
+Se montó la carpeta local:
 
-# Comenzando con el tema administrativo en la deteccion de usuarios que utilicen la hinton 1 y 2
+```
+Dockerfile_MC
+```
 
-### Uso de comandos linux y tmux:
+Esto permitió sincronizar los cambios entre el host y el contenedor.
 
-## Comandos linux:
-- sudo docker ps -a	     ---      // Muestra todos los contenedores (activos, detenidos y salidos).	
-Se usa para encontrar el ID o nombre de contenedores detenidos que necesitan ser eliminados o reiniciados. 
+Beneficios obtenidos:
 
-- sudo docker stop ID	 ---          // Detiene un contenedor en ejecución (por ID o nombre).	
-Se usa para pausar el entorno de desarrollo interactivo Dockerfile_MC. 
+- acceso a archivos desde el navegador
+- persistencia del código en el host
+- entorno reproducible
 
-- sudo docker start ID	 ---      // Reinicia un contenedor que ha sido detenido.	
-Se usa para reanudar el entorno persistente Dockerfile_MC. 
+### Comandos utilizados
 
-- sudo docker rm ID	     ---      // Elimina un contenedor que se encuentra detenido (por ID o nombre).	
-Parte del proceso de limpieza para liberar recursos. 
+Detener contenedor:
 
-- sudo docker rm -f Nombre	---   // Fuerza la eliminación de un contenedor, deteniéndolo si es necesario.	
-Útil para eliminar contenedores que no responden.
+```bash
+sudo docker stop practical_proskuriakova
+```
 
-- ssh hinton2@Dirección_IP --- // Este comando sirve para cambiar el usuario a el otro hinton en este caso
+Reiniciar contenedor:
 
-## Comandos tmux:
-- tmux ls	              ---                // Muestra una lista de todas las sesiones de Tmux activas.	
-Te permite verificar los nombres de las sesiones disponibles (ej., tmux_victoria).
+```bash
+sudo docker start practical_proskuriakova
+```
 
-- tmux new -s nombre_sesion	  ---        // Crea una nueva sesión de Tmux con el nombre especificado.	
-Inicia un nuevo espacio de trabajo aislado y persistente.
+Visualizar imágenes Docker:
 
-- tmux attach -t nombre_sesion	 ---     // Se adjunta (regresa) a una sesión de Tmux que ya existe.	
-Te devuelve al estado exacto de tu trabajo, incluso después de desconexiones.
+```bash
+sudo docker images
+```
 
-- Ctrl-b d	            ---              // Atajo de teclado para desadjuntar (separar) la sesión actual.	
-Es la forma segura de salir sin detener los procesos que corren dentro de ella.
+Visualizar contenedores activos:
 
-- tmux kill-session -t tmux_victoria   --- // Con este comando se elimia la sesion de tmux, asegurarse de no estar dentro del tmux, primero salir de la secion
+```bash
+sudo docker ps
+```
 
-# Detener el contenedor de Visión
-sudo docker stop docker_opencv
+---
 
-# Detener el contenedor de Pruebas Ligeras
-sudo docker stop docker_limited
+# Gestión de Branches
 
-| Dockers | Función | Puerto | Jupyter | Ejecutable (Reset & Run) | Parada (Stop) |
-| :--- | :--- | :---: | :---: | :--- | :--- |
-| **DockerFile** | Test básico | N/A | No | `sudo docker build -t dockerfile-basic -f Dockerfile/Dockerfile Dockerfile && sudo docker run --rm --name docker_basic dockerfile-basic` | (Auto) |
-| **DockerFile_MC** | DL Stack | 8888 | Sí | `sudo docker build -t dockerfile_mc -f Dockerfile_MC/Dockerfile Dockerfile_MC && sudo docker rm -f docker_mc \|\| true && sudo docker run -d --name docker_mc -p 8888:8888 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_MC:/app dockerfile_mc` | `sudo docker stop docker_mc` |
-| **DockerFile_MC2** | Pipeline | N/A | No | `sudo docker build -t dockerfile_mc2 -f Dockerfile_MC2/Dockerfile Dockerfile_MC2 && sudo docker run --rm --name docker_mc2_pipeline -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_MC2:/app dockerfile_mc2` | (Auto) |
-| **docker_opencv** | Visión | 8889 | Sí | `sudo docker rm -f docker_opencv \|\| true && sudo docker run -d --name docker_opencv -p 8889:8888 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_OpenCV:/app opencv-jupyter:v1` | `sudo docker stop docker_opencv` |
-| **DockerFile_Sklearn** | ML & PoC | 5000 | No | `sudo docker build -t dockerfile_sklearn -f Dockerfile_Sklearn/Dockerfile Dockerfile_Sklearn && sudo docker rm -f docker_sklearn \|\| true && sudo docker run -d --name docker_sklearn -p 5000:5000 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_Sklearn:/app dockerfile_sklearn` | `sudo docker stop docker_sklearn` |
-| **docker_limited** | Jupyter Liviano | 8890 | Sí | `sudo docker rm -f docker_limited \|\| true && sudo docker run -d --name docker_limited -p 8890:8888 -v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_Limited:/app limited-jupyter:v1` | `sudo docker stop docker_limited` |
+Actualizar referencias remotas sin mezclar cambios:
 
+```bash
+git fetch --all
+```
 
+Cambiar a rama principal:
 
-## el comienzo de un docker potente al nivel de una hinton 1
-- Para que un contenedor Docker sea realmente "potente" y aproveche el hardware de la HINTON I, no solo debe incluir las librerías, sino también estar configurado para la aceleración por hardware y la gestión eficiente de la memoria de video.
-- En este caso, lo llamaremos Docker_Hinton 
+```bash
+git checkout main
+```
+
+Sobrescribir rama remota con versión local:
+
+```bash
+git push origin main --force
+```
+
+---
+
+# Sesión — 17 de noviembre (11:46)
+
+## Configuración de entorno Machine Learning
+
+Se configuró un entorno de **Machine Learning reproducible dentro de Docker** utilizando **PyTorch**.
+
+### Framework seleccionado
+
+```
+torch==2.2.0
+```
+
+Se eligió **PyTorch CPU-only** debido a:
+
+- menor peso del contenedor
+- simplicidad para experimentación
+- no requerir GPU
+- rapidez de despliegue
+
+---
+
+# Estructura del entorno ML
+
+Directorio utilizado:
+
+```
+Dockerfile_MC2
+```
+
+Estructura:
+
+```
+Dockerfile_MC2
+│
+├── Dockerfile
+├── requirements.txt
+└── app
+    └── main.py
+```
+
+---
+
+# Dependencias
+
+Archivo `requirements.txt`
+
+```txt
+numpy
+torch==2.2.0
+```
+
+El objetivo fue mantener un contenedor **ligero y rápido de construir**.
+
+---
+
+# Script de validación del entorno
+
+El archivo:
+
+```
+app/main.py
+```
+
+verifica el funcionamiento del entorno mediante:
+
+1. generación de datos sintéticos
+
+```
+y = 3x + 2
+```
+
+2. construcción de una red neuronal multicapa (MLP)
+
+3. entrenamiento durante múltiples épocas
+
+4. impresión de la pérdida (`loss`)
+
+5. predicción final del modelo
+
+---
+
+# Imagen base del contenedor
+
+Se utilizó:
+
+```
+python:3.10-slim
+```
+
+Esto permite:
+
+- menor tamaño de imagen
+- menor tiempo de construcción
+- menor consumo de recursos
+
+El contenedor ejecuta automáticamente:
+
+```bash
+python app/main.py
+```
+
+---
+
+# Almacenamiento Docker
+
+Las imágenes Docker se almacenan en:
+
+```
+/var/lib/docker
+```
+
+Para listarlas:
+
+```bash
+sudo docker images
+```
+
+---
+
+# Uso de Scikit-learn
+
+**Scikit-learn** es una biblioteca de Python especializada en **Machine Learning clásico**.
+
+Permite implementar algoritmos de:
+
+- clasificación
+- regresión
+- clustering
+- reducción de dimensionalidad
+- validación de modelos
+
+Es ampliamente utilizada para **prototipado rápido y pruebas de modelos**.
+
+---
+
+# Administración de usuarios en Hinton
+
+Se comenzó la gestión de uso de recursos en los servidores:
+
+- HINTON 1
+- HINTON 2
+
+Herramientas utilizadas:
+
+- Linux
+- Docker
+- tmux
+- SSH
+
+---
+
+# Comandos Docker utilizados
+
+Listar todos los contenedores:
+
+```bash
+sudo docker ps -a
+```
+
+Detener contenedor:
+
+```bash
+sudo docker stop ID
+```
+
+Iniciar contenedor:
+
+```bash
+sudo docker start ID
+```
+
+Eliminar contenedor detenido:
+
+```bash
+sudo docker rm ID
+```
+
+Forzar eliminación:
+
+```bash
+sudo docker rm -f NOMBRE
+```
+
+---
+
+# Conexión entre servidores
+
+Acceso por SSH:
+
+```bash
+ssh hinton2@Direccion_IP
+```
+
+---
+
+# Uso de tmux
+
+`tmux` permite mantener procesos ejecutándose incluso si se pierde la conexión SSH.
+
+Listar sesiones activas:
+
+```bash
+tmux ls
+```
+
+Crear sesión:
+
+```bash
+tmux new -s nombre_sesion
+```
+
+Adjuntarse a sesión existente:
+
+```bash
+tmux attach -t nombre_sesion
+```
+
+Desconectarse sin detener procesos:
+
+```
+Ctrl + b  luego  d
+```
+
+Eliminar sesión:
+
+```bash
+tmux kill-session -t nombre_sesion
+```
+
+---
+
+# Contenedores disponibles
+
+| Docker | Función | Puerto | Jupyter |
+|------|------|------|------|
+| DockerFile | Test básico | N/A | No |
+| DockerFile_MC | Deep Learning | 8888 | Sí |
+| DockerFile_MC2 | Pipeline ML | N/A | No |
+| docker_opencv | Visión computacional | 8889 | Sí |
+| DockerFile_Sklearn | ML experimental | 5000 | No |
+| docker_limited | Jupyter liviano | 8890 | Sí |
+
+---
+
+# Ejecución de contenedores
+
+### Deep Learning Stack
+
+```bash
+sudo docker build -t dockerfile_mc -f Dockerfile_MC/Dockerfile Dockerfile_MC
+
+sudo docker rm -f docker_mc || true
+
+sudo docker run -d \
+--name docker_mc \
+-p 8888:8888 \
+-v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_MC:/app \
+dockerfile_mc
+```
+
+---
+
+### Pipeline ML
+
+```bash
+sudo docker build -t dockerfile_mc2 -f Dockerfile_MC2/Dockerfile Dockerfile_MC2
+
+sudo docker run --rm \
+--name docker_mc2_pipeline \
+-v /home/hinton1/Documents/ADMINISTRACION/repo/gestion_hinton/Dockerfile_MC2:/app \
+dockerfile_mc2
+```
+
+---
+
+# Roadmap
+
+Próximas mejoras del sistema:
+
+- publicación de imágenes en **DockerHub**
+- integración de análisis con **DeepWiki**
+- exploración de **Nested Learning**
+- investigación sobre infraestructura **Radware**
+
+---
+
+# Futuro contenedor: Docker_Hinton
+
+Se plantea desarrollar un contenedor optimizado denominado:
+
+```
+Docker_Hinton
+```
+
+Objetivo:
+
+Aprovechar completamente el hardware del servidor **HINTON 1**.
+
+Características previstas:
+
+- optimización para entrenamiento de modelos
+- soporte para aceleración por hardware
+- mejor gestión de memoria
+- compatibilidad con GPU (CUDA)
+- librerías optimizadas de ML y DL
+
+Este contenedor servirá como **base para entrenamiento de modelos más complejos**.
