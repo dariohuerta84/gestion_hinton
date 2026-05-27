@@ -25,4 +25,4 @@ COPY custom_welcome.py /usr/local/bin/welcome.py
 EXPOSE 5050
 EXPOSE 5051
 
-CMD ["sh", "-c", "python3 /usr/local/bin/welcome.py || true && jupyter lab --ip=0.0.0.0 --port=5050 --no-browser --allow-root --NotebookApp.token=''"]
+CMD ["sh", "-c", "python3 /usr/local/bin/welcome.py || true && python3 /app/llm_hinton.py > /tmp/chatbot.log 2>&1 & jupyter lab --ip=0.0.0.0 --port=5050 --no-browser --allow-root --NotebookApp.token=''"]

@@ -1,3 +1,91 @@
+Docker_Hinton/
+├── Dockerfile          ← Define cómo se construye la imagen
+├── docker-compose.yml  ← Configura el contenedor
+├── llm_hinton.py       ← Script del chatbot
+├── custom_welcome.py   ← Mensaje de bienvenida
+├── requirements.txt    ← Dependencias Python
+└── app/
+    ├── main_notebook.ipynb     ← Notebooks para Jupyter
+    ├── Untitled.ipynb
+    ├── fondo.jpg               ← Imagen para el chatbot
+    └── llm_hinton.py           ← Backup del script
+
+JupyterLab en puerto 5050
+Chatbot Gradio en puerto 5051
+
+Pasos para desplegar en otra PC:
+1. Preparar la PC destino
+Asegúrate de que tenga instalado:
+# Verificar Docker
+docker --version
+
+# Verificar NVIDIA Docker
+docker run --rm --runtime=nvidia nvidia/cuda:12.2.0-base-ubuntu22.04 nvidia-smi
+
+Docker
+NVIDIA Docker Runtime (para soporte GPU)
+Git (opcional)
+
+2. Copiar el proyecto
+
+Opción A - Por Git:
+
+git clone https://github.com/dariohuerta84/gestion_hinton.git
+cd gestion_hinton/Docker_Hinton
+
+
+Opción B - Copiar carpeta manualmente:
+git clone https://github.com/dariohuerta84/gestion_hinton.git
+cd gestion_hinton/Docker_Hinton
+
+
+
+Copia toda la carpeta Docker_Hinton a la PC destino
+Asegúrate de incluir:
+Dockerfile
+docker-compose.yml
+requirements.txt
+llm_hinton.py
+custom_welcome.py
+app/ (con fondo.jpg y notebooks)
+
+
+3. Permisos y configuración de Docker
+# Agregar usuario al grupo docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Crear link del socket de Docker si es necesario
+sudo mkdir -p ~/.docker/desktop
+sudo ln -sf /var/run/docker.sock ~/.docker/desktop/docker.sock
+
+4. Levantar los servicios
+cd Docker_Hinton
+docker compose up -d
+
+O si prefieres ver los logs en tiempo real:
+docker compose up
+
+
+5. Verificar que está funcionando
+
+# Ver logs
+docker logs hinton_interactive_final
+
+# Verificar puertos
+docker ps
+
+6. Acceder a los servicios
+
+JupyterLab: http://localhost:5050/lab
+Chatbot: http://localhost:5051
+Resumen rápido:
+⚠️ Importante:
+
+La PC destino debe tener NVIDIA Docker Runtime configurado
+Necesita suficiente VRAM (el modelo Llama 8B requiere mínimo 16GB)
+La primera ejecución tardará más porque descargará el modelo (~7GB)
+
 
 - http://localhost:5050: Sigue siendo tu base de operaciones. Aquí entras a JupyterLab, creas tus archivos .py y escribes tus notebooks.
 

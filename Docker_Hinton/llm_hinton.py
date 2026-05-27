@@ -18,8 +18,8 @@ def chat_func(message, history):
 
 # 3. Lógica del Fondo (RUTA CRÍTICA)
 def get_base64_image(image_path):
-    # Buscamos el fondo en la carpeta /app del contenedor
-    full_path = os.path.join("/app", image_path)
+    # Buscamos el fondo en la carpeta /app/app del contenedor
+    full_path = os.path.join("/app/app", image_path)
     with open(full_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
