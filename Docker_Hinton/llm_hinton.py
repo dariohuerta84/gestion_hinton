@@ -80,29 +80,41 @@ def chat_func(message, history):
     out = pipe(messages, max_new_tokens=512, do_sample=True, temperature=0.6)
     return out[0]['generated_text'][-1]['content']
 
-# 3. Lógica del Fondo (RUTA CRÍTICA)
-def get_base64_image(image_path):
-    # Buscamos el fondo en la carpeta /app/app del contenedor
-    full_path = os.path.join("/app/app", image_path)
-    with open(full_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
+# 3. Interfaz con logo centrado
 
-try:
-    # Intentamos cargar fondo.jpg
-    base64_image = get_base64_image("fondo.jpg")
-    img_source = f"data:image/jpeg;base64,{base64_image}"
-except Exception as e:
-    print(f"⚠️ Error cargando fondo: {e}")
-    img_source = ""
+def get_logo_base64(image_name):
+    for base_path in ["/app", "/app/app", os.getcwd()]:
+        logo_path = os.path.join(base_path, image_name)
+        if os.path.exists(logo_path):
+            with open(logo_path, "rb") as img_file:
+                return base64.b64encode(img_file.read()).decode("utf-8")
+    return None
+
+logo_base64 = get_logo_base64("logoupch.jpg")
+if not logo_base64:
+    print("⚠️ logoupch.jpg no se encontró en /app, /app/app o directorio actual")
+logo_url = f"data:image/jpeg;base64,{logo_base64}" if logo_base64 else ""
 
 cyberpunk_css = f"""
-.gradio-container {{
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{img_source}') !important;
-    background-size: cover !important;
-    background-position: center !important;
+body, html, .gradio-app, .gradio-container {{
+    background-color: #ffffff !important;
+    background-image: url('{logo_url}') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-size: auto !important;
+    min-height: 100vh !important;
 }}
-#chatbot {{ background: rgba(10, 10, 25, 0.85) !important; border: 2px solid #00f2ff !important; }}
-h1 {{ color: #fff !important; text-shadow: 2px 2px #ff003c; text-align: center; font-family: 'Impact'; }}
+#chatbot {{
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid #000000 !important;
+}}
+h1 {{
+    color: #000000 !important;
+    text-shadow: none !important;
+    text-align: center;
+    font-family: 'Impact';
+}}
 """
 
 with gr.Blocks(css=cyberpunk_css) as demo:
