@@ -1,139 +1,117 @@
+# Docker_Hinton — HINTON 1 (Interfaz Neural)
+
+> Repositorio para ejecutar JupyterLab y un chatbot Gradio acelerado por GPU NVIDIA.
+
+## Resumen
+
+- **JupyterLab** (IDE / Notebooks) → puerto `5050`
+- **Chatbot (Gradio)** → puerto `5051` (usa GPU)
+
+## Estructura principal
+
+```
 Docker_Hinton/
-├── Dockerfile          ← Define cómo se construye la imagen
-├── docker-compose.yml  ← Configura el contenedor
-├── llm_hinton.py       ← Script del chatbot
-├── custom_welcome.py   ← Mensaje de bienvenida
-├── requirements.txt    ← Dependencias Python
+├── Dockerfile
+├── docker-compose.yml
+├── llm_hinton.py         # Script principal del chatbot (Gradio)
+├── custom_welcome.py     # Mensaje de bienvenida al iniciar el contenedor
+├── requirements.txt
 └── app/
-    ├── main_notebook.ipynb     ← Notebooks para Jupyter
+    ├── main_notebook.ipynb
     ├── Untitled.ipynb
-    ├── fondo.jpg               ← Imagen para el chatbot
-    └── llm_hinton.py           ← Backup del script
+    └── fondo.jpg         # Imagen usada como fondo por la UI
+```
 
-JupyterLab en puerto 5050
-Chatbot Gradio en puerto 5051
+## Requisitos
 
-Pasos para desplegar en otra PC:
-1. Preparar la PC destino
-Asegúrate de que tenga instalado:
-# Verificar Docker
-docker --version
+- Docker
+- NVIDIA drivers (host) y `nvidia-container-toolkit` o `nvidia-docker2`
+- Docker Compose v2 (`docker compose`)
+- Conexión a Internet para descargar pesos del modelo en la primera ejecución
 
-# Verificar NVIDIA Docker
-docker run --rm --runtime=nvidia nvidia/cuda:12.2.0-base-ubuntu22.04 nvidia-smi
+> Nota: el modelo puede requerir mucha VRAM (recomendado ≥ 16 GB; 48 GB ideal para modelos grandes).
 
-Docker
-NVIDIA Docker Runtime (para soporte GPU)
-Git (opcional)
+## Despliegue en otra máquina (paso a paso)
 
-2. Copiar el proyecto
+1. Clona o copia el repositorio en la máquina destino:
 
-Opción A - Por Git:
-
+```bash
 git clone https://github.com/dariohuerta84/gestion_hinton.git
 cd gestion_hinton/Docker_Hinton
+```
 
+2. (Opcional) Configura usuario para usar Docker sin `sudo`:
 
-Opción B - Copiar carpeta manualmente:
-git clone https://github.com/dariohuerta84/gestion_hinton.git
-cd gestion_hinton/Docker_Hinton
-
-
-
-Copia toda la carpeta Docker_Hinton a la PC destino
-Asegúrate de incluir:
-Dockerfile
-docker-compose.yml
-requirements.txt
-llm_hinton.py
-custom_welcome.py
-app/ (con fondo.jpg y notebooks)
-
-
-3. Permisos y configuración de Docker
-# Agregar usuario al grupo docker
+```bash
 sudo usermod -aG docker $USER
 newgrp docker
+```
 
-# Crear link del socket de Docker si es necesario
+3. (Opcional) Si alguna herramienta busca el socket en la ruta de Docker Desktop:
+
+```bash
 sudo mkdir -p ~/.docker/desktop
 sudo ln -sf /var/run/docker.sock ~/.docker/desktop/docker.sock
+```
 
-4. Levantar los servicios
-cd Docker_Hinton
+4. Construcción (opcional — `docker compose` construye si falta):
+
+```bash
+docker build -t hinton-ultimate .
+```
+
+5. Levantar los servicios:
+
+```bash
 docker compose up -d
+```
 
-O si prefieres ver los logs en tiempo real:
-docker compose up
+6. Verificar:
 
-
-5. Verificar que está funcionando
-
-# Ver logs
-docker logs hinton_interactive_final
-
-# Verificar puertos
+```bash
 docker ps
+# ver logs
+docker logs -f hinton_interactive_final
+```
 
-6. Acceder a los servicios
+## Acceso
 
-JupyterLab: http://localhost:5050/lab
-Chatbot: http://localhost:5051
-Resumen rápido:
-⚠️ Importante:
+- JupyterLab: http://localhost:5050/lab
+- Chatbot (Gradio): http://localhost:5051
 
-La PC destino debe tener NVIDIA Docker Runtime configurado
-Necesita suficiente VRAM (el modelo Llama 8B requiere mínimo 16GB)
-La primera ejecución tardará más porque descargará el modelo (~7GB)
+## Comandos útiles
 
+- Levantar (foreground): `docker compose up`
+- Levantar (background): `docker compose up -d`
+- Parar (liberar GPU): `docker compose stop` o `docker stop hinton_interactive_final`
+- Iniciar: `docker compose start` o `docker start hinton_interactive_final`
+- Reiniciar: `docker compose restart` o `docker restart hinton_interactive_final`
+- Borrar: `docker compose down`
+- Reconstruir imagen: `docker build -t hinton-ultimate .`
+- Ejecutar chatbot manualmente dentro del contenedor:
+  `docker exec -it hinton_interactive_final python3 /app/llm_hinton.py`
 
-- http://localhost:5050: Sigue siendo tu base de operaciones. Aquí entras a JupyterLab, creas tus archivos .py y escribes tus notebooks.
+## Variables y recomendaciones
 
-- http://localhost:5051: Este será el enlace específico para la Interfaz de Chat (Gradio). Cuando ejecutes el script del modelo de lenguaje, la página con el fondo de los edificios cyberpunk y el chat neón se cargará en este puerto.
+- Si usas Hugging Face y quieres evitar límites anónimos, exporta tu token:
 
-# 🤖 HINTON 1 - Neural Interface Control
+```bash
+export HF_TOKEN="<tu_token>"
+```
 
-Este proyecto despliega una interfaz de chat inteligente basada en **Llama-3.1** y **Gradio**, optimizada para ejecutarse en la GPU **NVIDIA RTX A6000** del Laboratorio FACI-UPCH.
+- La primera ejecución descarga varios GB; sé paciente.
+- Si el contenedor no ve la GPU, comprueba `nvidia-smi` en el host y que `nvidia-container-toolkit` esté instalado.
 
-## 🚀 Comandos de Gestión (Docker Compose)
+## Solución rápida de problemas
 
-Para gestionar el contenedor de la IA, abre una terminal en la carpeta del proyecto y utiliza:
+- `Cannot connect to the Docker daemon`: arranca `dockerd` y añade el usuario al grupo `docker`.
+- `Error pull access denied for hinton-ultimate`: ejecuta `docker build -t hinton-ultimate .` en la carpeta del Dockerfile.
+- `Puerto 5051 no disponible`: revisa `docker logs hinton_interactive_final` y `/tmp/chatbot.log` dentro del contenedor.
+- `fondo.jpg not found`: asegúrate que `app/fondo.jpg` existe y que `docker-compose.yml` monta el volumen (por defecto `.:/app`).
 
-1. Pausar el Servicio (Liberar GPU)
-Si necesitas detener el procesamiento para que otro investigador use la RTX A6000:
-- sudo docker stop hinton_interactive_final
+## Notas finales
 
-2. Reanudar el Servicio
-Para volver a activar el chatbot sin perder la configuración del contenedor:
-- sudo docker start hinton_interactive_final
+1. Ambos servicios corren dentro del mismo contenedor y se exponen en puertos distintos.
+2. Si prefieres separar Jupyter y Gradio en servicios/containers distintos, puedo actualizar `docker-compose.yml` para eso.
 
-3. Ejecutar el Cerebro (Llama-3.1)
-Una vez iniciado el contenedor, debes ejecutar el script para cargar el modelo en los 49GB de VRAM:
-- sudo docker exec -it hinton_interactive_final python3 /app/llm_hinton.py
-
-4. Reinicio de Emergencia
-Si el puerto 5051 deja de responder o la interfaz se congela:
-- sudo docker restart hinton_interactive_final
-
-5. Eliminacion del contenedor
-Primero detienes el proceso para que la GPU RTX A6000 cierre la sesión de forma limpia y luego lo borras.
-- sudo docker stop hinton_interactive_final
-- sudo docker rm hinton_interactive_final
-
-
-### 🚀 Gestión del Proyecto con Docker Compose
-
-Ejecutar estos comandos en la ruta: `~/Documents/ADMINISTRACION/repo/gestion_hinton/Docker_Hinton`
-
-| Acción | Comando | Descripción |
-| :--- | :--- | :--- |
-| **Levantar** | `sudo docker-compose up -d` | Crea e inicia el contenedor en segundo plano. |
-| **Pausar** | `sudo docker-compose stop` | Libera la **RTX A6000** y RAM (mantiene estado). |
-| **Reanudar** | `sudo docker-compose start` | Reactiva el contenedor previamente pausado. |
-| **Estado** | `sudo docker-compose ps` | Muestra si el servicio está `Up` o `Exit`. |
-| **Logs** | `sudo docker-compose logs -f` | Monitorea la terminal de la IA en tiempo real. |
-| **Reiniciar** | `sudo docker-compose restart` | Útil si la interfaz de Gradio no responde. |
-| **Eliminar** | `sudo docker-compose down` | Borra el contenedor y redes (código a salvo). |
-| **Ejecutar IA** | `sudo docker exec -it hinton_interactive_final python3 /app/llm_hinton.py` | Inyecta el script del chatbot en el contenedor. |
-
-> **Nota:** Según el **Art. 19**, libera la GPU con `stop` si no la estás usando para priorizar tesis.
+¿Quieres que añada un script `deploy.sh` para automatizar los pasos de despliegue en la máquina destino?
