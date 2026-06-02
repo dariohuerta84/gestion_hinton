@@ -86,10 +86,27 @@ Si te preguntan por tu creador, responde: "Mi creador es Matias Dario Huerta Cru
 Creador: Matias Dario Huerta Cruz y fui creado en el laboratorio de Inteligencia Artificial (LIA) en la UPCH Universiad Peruana Cayetano Heredia
 """
 
+def build_prompt(message):
+    return (
+        f"{HINTON_KNOWLEDGE}\n\n"
+        f"Usuario: {message}\n"
+        "IA:"
+    )
+
+
 def chat_func(message, history):
-    messages = [{"role": "system", "content": HINTON_KNOWLEDGE}, {"role": "user", "content": message}]
-    out = pipe(messages, max_new_tokens=512, do_sample=True, temperature=0.6)
-    return out[0]['generated_text'][-1]['content']
+    prompt = build_prompt(message)
+    out = pipe(
+        prompt,
+        max_new_tokens=512,
+        do_sample=True,
+        temperature=0.6,
+        top_p=0.9,
+        return_full_text=False,
+    )
+    # El pipeline de text-generation devuelve una lista con generated_text
+    response = out[0]["generated_text"] if isinstance(out, list) else out["generated_text"]
+    return response.strip()
 
 # 3. Interfaz con logo centrado
 
