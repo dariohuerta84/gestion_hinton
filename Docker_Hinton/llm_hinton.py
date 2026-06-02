@@ -138,7 +138,7 @@ body, html, .gradio-app, .gradio-container {{
     border: 2px solid #000000 !important;
 }}
 h1 {{
-    color: #000000 !important;
+    color: red !important;
     text-shadow: none !important;
     text-align: center;
     font-family: 'Impact';
