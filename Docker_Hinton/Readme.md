@@ -114,4 +114,42 @@ export HF_TOKEN="<tu_token>"
 1. Ambos servicios corren dentro del mismo contenedor y se exponen en puertos distintos.
 2. Si prefieres separar Jupyter y Gradio en servicios/containers distintos, puedo actualizar `docker-compose.yml` para eso.
 
-¿Quieres que añada un script `deploy.sh` para automatizar los pasos de despliegue en la máquina destino?
+
+
+Docker Compose
+└── chatbot-hinton (container: hinton_interactive_final)
+    ├── Volumen: .:/app
+    ├── GPU: runtime nvidia
+    ├── Puertos:
+    │   ├── 5051 → Gradio chatbot
+    │   └── 5050 → JupyterLab
+    ├── Entorno:
+    │   ├── NVIDIA_VISIBLE_DEVICES=all
+    │   ├── NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    │   └── HF_TOKEN=${HF_TOKEN}
+    └── Código principal:
+        └── /app/llm_hinton.py
+            ├── Carga modelo Hugging Face
+            │   ├── unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit
+            │   ├── dtype=torch.bfloat16
+            │   └── device_map="auto"
+            ├── Autenticación:
+            │   └── use_auth_token = HF_TOKEN
+            ├── Prompt del sistema:
+            │   └── HINTON_KNOWLEDGE
+            │       ├── HINTON 1 info
+            │       ├── HINTON 2 info
+            │       ├── manual/reglamento
+            │       └── creador: Matias Dario Huerta Cruz
+            ├── Función de chat:
+            │   └── chat_func(message, history)
+            │       ├── role: system → HINTON_KNOWLEDGE
+            │       └── role: user → message
+            └── Interfaz Gradio:
+                ├── gr.Blocks
+                ├── gr.HTML(title)
+                ├── gr.ChatInterface(fn=chat_func)
+                └── CSS:
+                    ├── fondo blanco
+                    ├── logo centered: logoupch.jpg
+                    └── panel de chat semi-transparente
