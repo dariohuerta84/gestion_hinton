@@ -6,7 +6,18 @@ import os
 
 # 1. IA Core
 model_id = "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
-pipe = pipeline("text-generation", model=model_id, model_kwargs={"dtype": torch.bfloat16}, device_map="auto")
+hf_token = os.getenv("HF_TOKEN")
+if hf_token:
+    print("✅ Usando HF_TOKEN para autenticación en Hugging Face")
+else:
+    print("⚠️ No se detectó HF_TOKEN; la descarga será anónima y con límites de tasa más bajos")
+pipe = pipeline(
+    "text-generation",
+    model=model_id,
+    model_kwargs={"dtype": torch.bfloat16},
+    device_map="auto",
+    use_auth_token=hf_token if hf_token else None,
+)
 
 # 2. Conocimiento HINTON
 HINTON_KNOWLEDGE = """
