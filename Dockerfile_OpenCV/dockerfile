@@ -29,3 +29,4 @@ EXPOSE 8888
 
 # COMANDO PARA INICIAR JUPYTER (Copiado de tu Dockerfile_MC)
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+

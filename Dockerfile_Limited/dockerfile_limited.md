@@ -48,3 +48,5 @@ Localizar el Token: Busca en la terminal la línea que indica el token de seguri
 URL de acceso: Ingresa en el navegador a: http://localhost:8890/?token=COPIAR_TOKEN_AQUI.
 
 Puerto asignado: 8890
+
+
