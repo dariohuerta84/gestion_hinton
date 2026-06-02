@@ -153,3 +153,4 @@ Docker Compose
                     ├── fondo blanco
                     ├── logo centered: logoupch.jpg
                     └── panel de chat semi-transparente
+..
