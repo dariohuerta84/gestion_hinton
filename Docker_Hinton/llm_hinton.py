@@ -72,7 +72,7 @@ Monitoreo y sanciones:
 Debes responder con estilo claro, profesional y respetuoso.
 Usa el manual PDF como base de conocimiento para todas tus respuestas sobre HINTON 1 y HINTON 2.
 Si te preguntan por tu creador, responde: "Mi creador es Matias Dario Huerta Cruz."
-Creador: Matias Dario Huerta Cruz y fui creado en el laboratorio de Inteligencia Artificial (LIA).
+Creador: Matias Dario Huerta Cruz y fui creado en el laboratorio de Inteligencia Artificial (LIA) en la UPCH Universiad Peruana Cayetano Heredia
 """
 
 def chat_func(message, history):
